@@ -18,7 +18,7 @@
             align-items: center;
             min-height: 100vh;
             transition: background-color 0.3s;
-            padding: 20px 0; /* Added padding so it doesn't touch the top/bottom of small screens */
+            padding: 40px 0; 
         }
 
         .card {
@@ -74,28 +74,27 @@
 
         .bio { line-height: 1.6; margin-bottom: 20px; font-size: 0.95em; color: #444; }
 
-        /* NEW Feature 3: Flight Log (Skills Section) */
+        /* Feature 3: Flight Log */
         .flight-log {
             text-align: left;
-            background-color: #fff0f3; /* Very light pink background */
+            background-color: #fff0f3;
             padding: 20px;
             border-radius: 12px;
             border-left: 4px solid #d81b60;
             margin-bottom: 25px;
             box-shadow: inset 0 0 5px rgba(0,0,0,0.03);
         }
-        .flight-log h3 {
+        .flight-log h3, .contact-tower h3 {
             margin-top: 0;
             margin-bottom: 12px;
             color: #d81b60;
             font-size: 1.05em;
         }
-        /* Using Flexbox for the tags */
         .skills {
             display: flex;
-            flex-wrap: wrap; /* Allows tags to wrap to the next line */
-            gap: 8px; /* Space between tags */
-            list-style: none; /* Removes the standard bullet points */
+            flex-wrap: wrap;
+            gap: 8px;
+            list-style: none;
             padding: 0;
             margin: 0;
         }
@@ -108,9 +107,42 @@
             font-weight: bold;
             transition: transform 0.2s;
         }
-        .skills li:hover {
-            transform: scale(1.05); /* Tags pop out slightly when hovered */
+        .skills li:hover { transform: scale(1.05); }
+
+        /* NEW Feature 4: Control Tower (Contact Form) */
+        .contact-tower {
+            text-align: left;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #007bff; /* Blue radar theme */
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.03);
         }
+        .contact-tower h3 { color: #007bff; }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box; /* Keeps fields inside the box */
+            font-family: inherit;
+        }
+        .contact-form textarea { resize: vertical; }
+        .send-btn {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            margin-top: 0; /* Override default button margin */
+        }
+        .send-btn:hover { background-color: #0056b3; color: white; }
 
         /* Dark Mode Settings */
         body.dark-mode { background-color: #1a1a1a; background-image: none; }
@@ -120,11 +152,21 @@
         body.dark-mode .bio { color: #dddddd; }
         body.dark-mode .avatar { background: #3d3d3d; border-color: #ff8da1; }
         body.dark-mode .zulu-clock { color: #ffb000; border-color: #111; } 
-        
-        /* Dark Mode overrides for Flight Log */
         body.dark-mode .flight-log { background-color: #333; border-left-color: #ff8da1; box-shadow: none; }
         body.dark-mode .flight-log h3 { color: #ff8da1; }
         body.dark-mode .skills li { background-color: #444; color: #ffb6c1; border: 1px solid #555; }
+        
+        /* Dark Mode overrides for Control Tower */
+        body.dark-mode .contact-tower { background-color: #333; border-left-color: #4da3ff; box-shadow: none; }
+        body.dark-mode .contact-tower h3 { color: #4da3ff; }
+        body.dark-mode .contact-form input, body.dark-mode .contact-form textarea {
+            background-color: #444;
+            color: white;
+            border-color: #555;
+        }
+        body.dark-mode .contact-form input::placeholder, body.dark-mode .contact-form textarea::placeholder {
+            color: #aaa;
+        }
 
         /* Navigation Links & Buttons */
         .links { margin-bottom: 20px; }
@@ -174,16 +216,23 @@
         </p>
 
         <div class="flight-log">
-            <h3>📋 Flight Log: Skills & Tech</h3>
+            <h3>📋 Skills & Tech</h3>
             <ul class="skills">
                 <li>Git & GitHub</li>
-                <li>HTML5</li>
-                <li>CSS3 Flexbox</li>
-                <li>JavaScript</li>
                 <li>Air Navigation</li>
                 <li>MATLAB</li>
                 <li>AutoCAD</li>
             </ul>
+        </div>
+
+        <div class="contact-tower">
+            <h3>📠Contact me: </h3>
+            <form class="contact-form" action="mailto:buciumaria04@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="Name" placeholder="Pilot Name" required>
+                <input type="email" name="Email" placeholder="Return Frequency (Email)" required>
+                <textarea name="Message" rows="3" placeholder="Enter transmission..." required></textarea>
+                <button type="submit" class="send-btn">Transmit Message</button>
+            </form>
         </div>
 
         <div class="links">
