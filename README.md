@@ -7,6 +7,7 @@
     <h1>Welcome to My Practice Portfolio!</h1>
     <p>This is my stable main branch.</p>
     <div id="links">
-        </div>
+        <a href="https://github.com">Visit my GitHub</a>
+    </div>
 </body>
-</html># my-sandbox-portfolio
+</html>
