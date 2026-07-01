@@ -18,6 +18,7 @@
             align-items: center;
             min-height: 100vh;
             transition: background-color 0.3s;
+            padding: 20px 0; /* Added padding so it doesn't touch the top/bottom of small screens */
         }
 
         .card {
@@ -55,10 +56,10 @@
         h1 { margin: 0 0 5px 0; color: #d81b60; font-size: 1.8em; }
         .subtitle { color: #ff5c8a; font-weight: bold; margin: 0 0 15px 0; font-size: 1.1em; }
 
-        /* NEW: Aviation Zulu Clock Styling */
+        /* Aviation Zulu Clock Styling */
         .zulu-clock {
             background-color: #333;
-            color: #00ffcc; /* Digital cyan glow */
+            color: #00ffcc;
             font-family: 'Courier New', Courier, monospace;
             padding: 10px 20px;
             border-radius: 8px;
@@ -71,7 +72,45 @@
             border: 2px solid #222;
         }
 
-        .bio { line-height: 1.6; margin-bottom: 25px; font-size: 0.95em; color: #444; }
+        .bio { line-height: 1.6; margin-bottom: 20px; font-size: 0.95em; color: #444; }
+
+        /* NEW Feature 3: Flight Log (Skills Section) */
+        .flight-log {
+            text-align: left;
+            background-color: #fff0f3; /* Very light pink background */
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #d81b60;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.03);
+        }
+        .flight-log h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: #d81b60;
+            font-size: 1.05em;
+        }
+        /* Using Flexbox for the tags */
+        .skills {
+            display: flex;
+            flex-wrap: wrap; /* Allows tags to wrap to the next line */
+            gap: 8px; /* Space between tags */
+            list-style: none; /* Removes the standard bullet points */
+            padding: 0;
+            margin: 0;
+        }
+        .skills li {
+            background-color: #ffb6c1;
+            color: #ad1457;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .skills li:hover {
+            transform: scale(1.05); /* Tags pop out slightly when hovered */
+        }
 
         /* Dark Mode Settings */
         body.dark-mode { background-color: #1a1a1a; background-image: none; }
@@ -80,8 +119,12 @@
         body.dark-mode .subtitle { color: #ffb6c1; }
         body.dark-mode .bio { color: #dddddd; }
         body.dark-mode .avatar { background: #3d3d3d; border-color: #ff8da1; }
-        /* Make clock glow orange like an airplane cockpit instrument in dark mode */
         body.dark-mode .zulu-clock { color: #ffb000; border-color: #111; } 
+        
+        /* Dark Mode overrides for Flight Log */
+        body.dark-mode .flight-log { background-color: #333; border-left-color: #ff8da1; box-shadow: none; }
+        body.dark-mode .flight-log h3 { color: #ff8da1; }
+        body.dark-mode .skills li { background-color: #444; color: #ffb6c1; border: 1px solid #555; }
 
         /* Navigation Links & Buttons */
         .links { margin-bottom: 20px; }
@@ -98,7 +141,6 @@
         }
         .links a:hover { background-color: #ad1457; transform: translateY(-2px); }
         
-        /* Theme Toggle Button */
         #theme-btn {
             padding: 10px 20px;
             border: 2px solid #d81b60;
@@ -131,6 +173,19 @@
             and building things from scratch. Welcome to my coding journey!
         </p>
 
+        <div class="flight-log">
+            <h3>📋 Flight Log: Skills & Tech</h3>
+            <ul class="skills">
+                <li>Git & GitHub</li>
+                <li>HTML5</li>
+                <li>CSS3 Flexbox</li>
+                <li>JavaScript</li>
+                <li>Air Navigation</li>
+                <li>MATLAB</li>
+                <li>AutoCAD</li>
+            </ul>
+        </div>
+
         <div class="links">
             <a href="https://github.com/mariabuciu" target="_blank">GitHub</a>
             <a href="https://www.linkedin.com/in/maria-buciu/" target="_blank">LinkedIn</a>
@@ -140,7 +195,6 @@
     </div>
 
     <script>
-        // Feature 1: Dark Mode Toggle
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");
             const button = document.getElementById("theme-btn");
@@ -151,21 +205,15 @@
             }
         }
 
-        // NEW Feature 2: Zulu Time Clock
         function updateZuluClock() {
             const now = new Date();
-            // Get UTC time and force it to be 2 digits (e.g., "05" instead of "5")
             const hours = String(now.getUTCHours()).padStart(2, '0');
             const minutes = String(now.getUTCMinutes()).padStart(2, '0');
             const seconds = String(now.getUTCSeconds()).padStart(2, '0');
-            
-            // Put the time inside our HTML div
             document.getElementById('zulu-clock').innerText = hours + ':' + minutes + ':' + seconds + ' Z';
         }
         
-        // Run it once immediately so it doesn't show 00:00:00 at first
         updateZuluClock(); 
-        // Tell the browser to run this function every 1000 milliseconds (1 second)
         setInterval(updateZuluClock, 1000); 
     </script>
 </body>
