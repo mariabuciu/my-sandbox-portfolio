@@ -3,82 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Maria Buciu - Portfolio</title>
     <style>
-        /* Light Mode (Pink & Airplanes) */
+        /* Light Mode Settings */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffb6c1; /* Pastel Pink background */
-            /* This adds stylized airplane shapes to the background pattern */
-            background-image: radial-gradient(rgba(255,255,255,0.3) 1px, transparent 0), 
-                              linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0.2) 55%, transparent 55%);
+            background-color: #ffb6c1; /* Beautiful Pastel Pink */
+            /* Clean geometric layout background pattern */
+            background-image: radial-gradient(rgba(255,255,255,0.4) 1.5px, transparent 0), 
+                              linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.15) 55%, transparent 55%);
             background-size: 30px 30px;
-            color: #333;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
             transition: background-color 0.3s;
         }
+
         .card {
-            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+            background-color: #ffffff;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
             max-width: 450px;
+            width: 90%;
             transition: background-color 0.3s, color 0.3s;
         }
         
-        /* A cool placeholding profile avatar graphic */
         .avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(to right, #ff7b90, #ffb6c1);
+            width: 100px;
+            height: 100px;
+            background: #ffecf0;
+            border: 3px solid #d81b60;
             border-radius: 50%;
             margin: 0 auto 20px auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 3em;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 2.5em;
         }
 
-        h1 { margin-bottom: 5px; color: #d81b60; }
-        .subtitle { color: #ff5c8a; font-weight: bold; margin-top: 0; }
-        .bio { line-height: 1.6; margin-bottom: 25px; font-size: 0.95em; color: #555; }
+        h1 { 
+            margin: 0 0 5px 0; 
+            color: #d81b60; 
+            font-size: 1.8em;
+        }
 
-        /* Dark Mode Override Styles */
+        .subtitle { 
+            color: #ff5c8a; 
+            font-weight: bold; 
+            margin: 0 0 20px 0;
+            font-size: 1.1em;
+        }
+
+        .bio { 
+            line-height: 1.6; 
+            margin-bottom: 25px; 
+            font-size: 0.95em; 
+            color: #444; /* Dark gray for excellent readability */
+        }
+
+        /* Dark Mode Settings */
         body.dark-mode {
             background-color: #1a1a1a;
             background-image: none;
-            color: #ffffff;
         }
         body.dark-mode .card {
             background-color: #2d2d2d;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         body.dark-mode h1 { color: #ff8da1; }
         body.dark-mode .subtitle { color: #ffb6c1; }
-        body.dark-mode .bio { color: #cccccc; }
+        body.dark-mode .bio { color: #dddddd; }
+        body.dark-mode .avatar { background: #3d3d3d; border-color: #ff8da1; }
 
         /* Navigation Links & Buttons */
+        .links {
+            margin-bottom: 20px;
+        }
         .links a {
             display: inline-block;
             margin: 5px;
             padding: 10px 24px;
-            background-color: #d81b60; /* Deep pink button */
+            background-color: #d81b60; 
             color: white;
             text-decoration: none;
             border-radius: 25px;
             font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: all 0.2s;
         }
-        .links a:hover { background-color: #ad1457; transform: translateY(-2px); }
+        .links a:hover { 
+            background-color: #ad1457; 
+            transform: translateY(-2px); 
+        }
         
-        button {
-            margin-top: 25px;
+        /* Theme Toggle Button */
+        #theme-btn {
             padding: 10px 20px;
             border: 2px solid #d81b60;
             border-radius: 25px;
@@ -88,152 +111,39 @@
             font-weight: bold;
             transition: all 0.3s;
         }
-        button:hover { background-color: #d81b60; color: white; }
-        body.dark-mode button { border-color: #ff8da1; color: #ff8da1; }
-        body.dark-mode button:hover { background-color: #ff8da1; color: #2d2d2d; }
+        #theme-btn:hover { 
+            background-color: #d81b60; 
+            color: white; 
+        }
+        
+        body.dark-mode #theme-btn { 
+            border-color: #ff8da1; 
+            color: #ff8da1; 
+        }
+        body.dark-mode #theme-btn:hover { 
+            background-color: #ff8da1; 
+            color: #2d2d2d; 
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="avatar">✈️</div>
-        
-        <h1>Your Name</h1>
-        <p class="subtitle">Future Aerospace Engineer</p>
-        
-        <p class="bio">
-            Hello! I am an aspiring software developer building out my portfolio sandbox. 
-            I love learning web programming and practicing production Git workflows!
-        </p>
 
-        <div class="links">
-            <a href="https://github.com" target="_blank">GitHub</a>
-            <a href="<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        /* Light Mode (Pink & Airplanes) */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffb6c1; /* Pastel Pink background */
-            /* This adds stylized airplane shapes to the background pattern */
-            background-image: radial-gradient(rgba(255,255,255,0.3) 1px, transparent 0), 
-                              linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0.2) 55%, transparent 55%);
-            background-size: 30px 30px;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            transition: background-color 0.3s;
-        }
-        .card {
-            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 450px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        /* A cool placeholding profile avatar graphic */
-        .avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(to right, #ff7b90, #ffb6c1);
-            border-radius: 50%;
-            margin: 0 auto 20px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3em;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        h1 { margin-bottom: 5px; color: #d81b60; }
-        .subtitle { color: #ff5c8a; font-weight: bold; margin-top: 0; }
-        .bio { line-height: 1.6; margin-bottom: 25px; font-size: 0.95em; color: #555; }
-
-        /* Dark Mode Override Styles */
-        body.dark-mode {
-            background-color: #1a1a1a;
-            background-image: none;
-            color: #ffffff;
-        }
-        body.dark-mode .card {
-            background-color: #2d2d2d;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        }
-        body.dark-mode h1 { color: #ff8da1; }
-        body.dark-mode .subtitle { color: #ffb6c1; }
-        body.dark-mode .bio { color: #cccccc; }
-
-        /* Navigation Links & Buttons */
-        .links a {
-            display: inline-block;
-            margin: 5px;
-            padding: 10px 24px;
-            background-color: #d81b60; /* Deep pink button */
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        .links a:hover { background-color: #ad1457; transform: translateY(-2px); }
-        
-        button {
-            margin-top: 25px;
-            padding: 10px 20px;
-            border: 2px solid #d81b60;
-            border-radius: 25px;
-            background-color: transparent;
-            color: #d81b60;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        button:hover { background-color: #d81b60; color: white; }
-        body.dark-mode button { border-color: #ff8da1; color: #ff8da1; }
-        body.dark-mode button:hover { background-color: #ff8da1; color: #2d2d2d; }
-    </style>
-</head>
-<body>
     <div class="card">
         <div class="avatar">✈️</div>
         
         <h1>Maria Buciu</h1>
-        <p class="subtitle">Future Software Developer</p>
+        <p class="subtitle">Future Aerospace Engineer</p>
         
         <p class="bio">
-             Hello! I am a third year student at Faculty of Aerospace Engineering at UPB, with a special interest in Air Navigation. I am also a beginner developer currently learning Git, GitHub, and web technologies. I love solving problems and building things from scratch. Welcome to my coding journey!
+            Hello! I am a third-year student at the Faculty of Aerospace Engineering at UPB, 
+            with a special interest in Air Navigation. I am also a beginner developer 
+            currently learning Git, GitHub, and web technologies. I love solving problems 
+            and building things from scratch. Welcome to my coding journey!
         </p>
 
         <div class="links">
-            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="https://github.com/mariabuciu" target="_blank">GitHub</a>
             <a href="https://www.linkedin.com/in/maria-buciu/" target="_blank">LinkedIn</a>
-        </div>
-        
-        <button id="theme-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    </div>
-
-    <script>
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-            const button = document.getElementById("theme-btn");
-            if (document.body.classList.contains("dark-mode")) {
-                button.innerText = "Toggle Light Mode";
-            } else {
-                button.innerText = "Toggle Dark Mode";
-            }
-        }
-    </script>
-</body>
-</html>" target="_blank">LinkedIn</a>
         </div>
         
         <button id="theme-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
