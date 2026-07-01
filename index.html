@@ -32,7 +32,6 @@
             transition: background-color 0.3s, color 0.3s;
         }
         
-        /* The Taking Off Animation CSS */
         .avatar {
             width: 100px;
             height: 100px;
@@ -56,7 +55,6 @@
         h1 { margin: 0 0 5px 0; color: #d81b60; font-size: 1.8em; }
         .subtitle { color: #ff5c8a; font-weight: bold; margin: 0 0 15px 0; font-size: 1.1em; }
 
-        /* Aviation Zulu Clock Styling */
         .zulu-clock {
             background-color: #333;
             color: #00ffcc;
@@ -74,7 +72,6 @@
 
         .bio { line-height: 1.6; margin-bottom: 20px; font-size: 0.95em; color: #444; }
 
-        /* Feature 3: Flight Log */
         .flight-log {
             text-align: left;
             background-color: #fff0f3;
@@ -109,40 +106,46 @@
         }
         .skills li:hover { transform: scale(1.05); }
 
-        /* NEW Feature 4: Control Tower (Contact Form) */
+        /* UPGRADED: The Comms Array */
         .contact-tower {
             text-align: left;
             background-color: #f8f9fa;
             padding: 20px;
             border-radius: 12px;
-            border-left: 4px solid #007bff; /* Blue radar theme */
+            border-left: 4px solid #007bff; 
             margin-bottom: 25px;
             box-shadow: inset 0 0 5px rgba(0,0,0,0.03);
         }
         .contact-tower h3 { color: #007bff; }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
+        .contact-tower p { margin-top: 0; font-size: 0.9em; color: #555; line-height: 1.5; }
+        
+        .email-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e9ecef;
+            padding: 10px 15px;
             border-radius: 6px;
-            box-sizing: border-box; /* Keeps fields inside the box */
-            font-family: inherit;
+            border: 1px solid #ccc;
         }
-        .contact-form textarea { resize: vertical; }
-        .send-btn {
-            width: 100%;
+        .email-text {
+            font-family: monospace;
+            font-size: 1em;
+            color: #333;
+            font-weight: bold;
+        }
+        .copy-btn {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.2s;
-            margin-top: 0; /* Override default button margin */
+            margin-top: 0;
         }
-        .send-btn:hover { background-color: #0056b3; color: white; }
+        .copy-btn:hover { background-color: #0056b3; }
 
         /* Dark Mode Settings */
         body.dark-mode { background-color: #1a1a1a; background-image: none; }
@@ -156,17 +159,12 @@
         body.dark-mode .flight-log h3 { color: #ff8da1; }
         body.dark-mode .skills li { background-color: #444; color: #ffb6c1; border: 1px solid #555; }
         
-        /* Dark Mode overrides for Control Tower */
+        /* Dark Mode overrides for Comms Array */
         body.dark-mode .contact-tower { background-color: #333; border-left-color: #4da3ff; box-shadow: none; }
         body.dark-mode .contact-tower h3 { color: #4da3ff; }
-        body.dark-mode .contact-form input, body.dark-mode .contact-form textarea {
-            background-color: #444;
-            color: white;
-            border-color: #555;
-        }
-        body.dark-mode .contact-form input::placeholder, body.dark-mode .contact-form textarea::placeholder {
-            color: #aaa;
-        }
+        body.dark-mode .contact-tower p { color: #ccc; }
+        body.dark-mode .email-box { background-color: #222; border-color: #555; }
+        body.dark-mode .email-text { color: #4da3ff; }
 
         /* Navigation Links & Buttons */
         .links { margin-bottom: 20px; }
@@ -216,13 +214,12 @@
         </p>
 
         <div class="contact-tower">
-            <h3>📧 Contact me: </h3>
-            <form class="contact-form" action="mailto:buciumaria04@gmail.com" method="post" enctype="text/plain">
-                <input type="text" name="Name" placeholder="Pilot Name" required>
-                <input type="email" name="Email" placeholder="Return Frequency (Email)" required>
-                <textarea name="Message" rows="3" placeholder="Enter transmission..." required></textarea>
-                <button type="submit" class="send-btn">Transmit Message</button>
-            </form>
+            <h3>📧 Contact </h3>
+            <p>Ready to collaborate? Copy my frequency below to open a channel.</p>
+            <div class="email-box">
+                <span class="email-text">buciumaria04@gmail.com</span>
+                <button onclick="copyEmail()" id="copy-btn" class="copy-btn">Copy</button>
+            </div>
         </div>
 
         <div class="links">
@@ -254,6 +251,25 @@
         
         updateZuluClock(); 
         setInterval(updateZuluClock, 1000); 
+
+        // NEW: Copy to Clipboard function
+        function copyEmail() {
+            // Change this to your real email!
+            const myEmail = "buciumaria04@gmail.com";
+            
+            // This is the JavaScript command that talks to your operating system's clipboard
+            navigator.clipboard.writeText(myEmail).then(() => {
+                const btn = document.getElementById("copy-btn");
+                btn.innerText = "Copied! ✔️";
+                btn.style.backgroundColor = "#28a745"; // Turns green
+                
+                // Change it back after 2 seconds
+                setTimeout(() => {
+                    btn.innerText = "Copy";
+                    btn.style.backgroundColor = ""; // Resets to original CSS color
+                }, 2000);
+            });
+        }
     </script>
 </body>
 </html>
