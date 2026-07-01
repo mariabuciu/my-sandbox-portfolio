@@ -19,6 +19,7 @@
             min-height: 100vh;
             transition: background-color 0.3s;
             padding: 40px 0; 
+            overflow-x: hidden; /* Keeps the hidden plane from stretching the page */
         }
 
         .card {
@@ -30,9 +31,10 @@
             max-width: 450px;
             width: 90%;
             transition: background-color 0.3s, color 0.3s;
+            z-index: 10; /* Keeps card in front of the background */
+            position: relative;
         }
         
-        /* The Taking Off Animation CSS */
         .avatar {
             width: 100px;
             height: 100px;
@@ -56,7 +58,6 @@
         h1 { margin: 0 0 5px 0; color: #d81b60; font-size: 1.8em; }
         .subtitle { color: #ff5c8a; font-weight: bold; margin: 0 0 15px 0; font-size: 1.1em; }
 
-        /* Aviation Zulu Clock Styling */
         .zulu-clock {
             background-color: #333;
             color: #00ffcc;
@@ -74,7 +75,6 @@
 
         .bio { line-height: 1.6; margin-bottom: 20px; font-size: 0.95em; color: #444; }
 
-        /* Feature 3: Flight Log */
         .flight-log {
             text-align: left;
             background-color: #fff0f3;
@@ -109,64 +109,45 @@
         }
         .skills li:hover { transform: scale(1.05); }
 
-        /* NEW Feature 4: Control Tower (Contact Form) */
         .contact-tower {
             text-align: left;
             background-color: #f8f9fa;
             padding: 20px;
             border-radius: 12px;
-            border-left: 4px solid #007bff; /* Blue radar theme */
+            border-left: 4px solid #007bff; 
             margin-bottom: 25px;
             box-shadow: inset 0 0 5px rgba(0,0,0,0.03);
         }
         .contact-tower h3 { color: #007bff; }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
+        .contact-tower p { margin-top: 0; font-size: 0.9em; color: #555; line-height: 1.5; }
+        
+        .email-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e9ecef;
+            padding: 10px 15px;
             border-radius: 6px;
-            box-sizing: border-box; /* Keeps fields inside the box */
-            font-family: inherit;
+            border: 1px solid #ccc;
         }
-        .contact-form textarea { resize: vertical; }
-        .send-btn {
-            width: 100%;
+        .email-text {
+            font-family: monospace;
+            font-size: 1em;
+            color: #333;
+            font-weight: bold;
+        }
+        .copy-btn {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.2s;
-            margin-top: 0; /* Override default button margin */
+            margin-top: 0;
         }
-        .send-btn:hover { background-color: #0056b3; color: white; }
-
-        /* Dark Mode Settings */
-        body.dark-mode { background-color: #1a1a1a; background-image: none; }
-        body.dark-mode .card { background-color: #2d2d2d; color: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        body.dark-mode h1 { color: #ff8da1; }
-        body.dark-mode .subtitle { color: #ffb6c1; }
-        body.dark-mode .bio { color: #dddddd; }
-        body.dark-mode .avatar { background: #3d3d3d; border-color: #ff8da1; }
-        body.dark-mode .zulu-clock { color: #ffb000; border-color: #111; } 
-        body.dark-mode .flight-log { background-color: #333; border-left-color: #ff8da1; box-shadow: none; }
-        body.dark-mode .flight-log h3 { color: #ff8da1; }
-        body.dark-mode .skills li { background-color: #444; color: #ffb6c1; border: 1px solid #555; }
-        
-        /* Dark Mode overrides for Control Tower */
-        body.dark-mode .contact-tower { background-color: #333; border-left-color: #4da3ff; box-shadow: none; }
-        body.dark-mode .contact-tower h3 { color: #4da3ff; }
-        body.dark-mode .contact-form input, body.dark-mode .contact-form textarea {
-            background-color: #444;
-            color: white;
-            border-color: #555;
-        }
-        body.dark-mode .contact-form input::placeholder, body.dark-mode .contact-form textarea::placeholder {
-            color: #aaa;
-        }
+        .copy-btn:hover { background-color: #0056b3; }
 
         /* Navigation Links & Buttons */
         .links { margin-bottom: 20px; }
@@ -194,11 +175,56 @@
             transition: all 0.3s;
         }
         #theme-btn:hover { background-color: #d81b60; color: white; }
+
+        /* Dark Mode Settings */
+        body.dark-mode { background-color: #1a1a1a; background-image: none; }
+        body.dark-mode .card { background-color: #2d2d2d; color: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        body.dark-mode h1 { color: #ff8da1; }
+        body.dark-mode .subtitle { color: #ffb6c1; }
+        body.dark-mode .bio { color: #dddddd; }
+        body.dark-mode .avatar { background: #3d3d3d; border-color: #ff8da1; }
+        body.dark-mode .zulu-clock { color: #ffb000; border-color: #111; } 
+        body.dark-mode .flight-log { background-color: #333; border-left-color: #ff8da1; box-shadow: none; }
+        body.dark-mode .flight-log h3 { color: #ff8da1; }
+        body.dark-mode .skills li { background-color: #444; color: #ffb6c1; border: 1px solid #555; }
+        body.dark-mode .contact-tower { background-color: #333; border-left-color: #4da3ff; box-shadow: none; }
+        body.dark-mode .contact-tower h3 { color: #4da3ff; }
+        body.dark-mode .contact-tower p { color: #ccc; }
+        body.dark-mode .email-box { background-color: #222; border-color: #555; }
+        body.dark-mode .email-text { color: #4da3ff; }
         body.dark-mode #theme-btn { border-color: #ff8da1; color: #ff8da1; }
         body.dark-mode #theme-btn:hover { background-color: #ff8da1; color: #2d2d2d; }
+
+        /* NEW Feature 5: Easter Egg Animation Settings */
+        #secret-plane {
+            position: fixed;
+            bottom: 10%;
+            left: -200px; /* Hidden off the left side of screen */
+            font-size: 6em;
+            z-index: 9999; /* Ensures it flies OVER everything else */
+            pointer-events: none; /* So you can't accidentally click it */
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        /* When the JS adds this class, the plane takes flight! */
+        .fly-animation {
+            animation: flyAcross 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 1 !important;
+        }
+
+        /* The flight path */
+        @keyframes flyAcross {
+            0% { transform: translateX(0) translateY(0) rotate(15deg) scale(1); }
+            30% { transform: translateX(40vw) translateY(-20vh) rotate(-5deg) scale(1.5); }
+            60% { transform: translateX(80vw) translateY(-10vh) rotate(5deg) scale(2); }
+            100% { transform: translateX(130vw) translateY(-40vh) rotate(-15deg) scale(1); }
+        }
     </style>
 </head>
 <body>
+
+    <div id="secret-plane">🛩️</div>
 
     <div class="card">
         <div class="avatar">✈️</div>
@@ -215,24 +241,13 @@
             and building things from scratch. Welcome to my coding journey!
         </p>
 
-        <div class="flight-log">
-            <h3>📋 Skills & Tech</h3>
-            <ul class="skills">
-                <li>Git & GitHub</li>
-                <li>Air Navigation</li>
-                <li>MATLAB</li>
-                <li>AutoCAD</li>
-            </ul>
-        </div>
-
         <div class="contact-tower">
-            <h3>📠Contact me: </h3>
-            <form class="contact-form" action="mailto:buciumaria04@gmail.com" method="post" enctype="text/plain">
-                <input type="text" name="Name" placeholder="Pilot Name" required>
-                <input type="email" name="Email" placeholder="Return Frequency (Email)" required>
-                <textarea name="Message" rows="3" placeholder="Enter transmission..." required></textarea>
-                <button type="submit" class="send-btn">Transmit Message</button>
-            </form>
+            <h3>📧 Contact </h3>
+            <p>Ready to collaborate? Copy my frequency below to open a channel.</p>
+            <div class="email-box">
+                <span class="email-text">buciumaria04@gmail.com</span>
+                <button onclick="copyEmail()" id="copy-btn" class="copy-btn">Copy</button>
+            </div>
         </div>
 
         <div class="links">
@@ -264,6 +279,48 @@
         
         updateZuluClock(); 
         setInterval(updateZuluClock, 1000); 
+
+        function copyEmail() {
+            // Change this to your real email!
+            const myEmail = "maria.buciu@example.com";
+            navigator.clipboard.writeText(myEmail).then(() => {
+                const btn = document.getElementById("copy-btn");
+                btn.innerText = "Copied! ✔️";
+                btn.style.backgroundColor = "#28a745"; 
+                setTimeout(() => {
+                    btn.innerText = "Copy";
+                    btn.style.backgroundColor = ""; 
+                }, 2000);
+            });
+        }
+
+        // NEW Feature 5: The Easter Egg Key Logger
+        let keyBuffer = ""; // This empty string will store the keys we press
+        
+        // Listen for any key pressed on the whole webpage
+        document.addEventListener("keydown", function(event) {
+            // Add the pressed key to our string and make it uppercase
+            keyBuffer += event.key.toUpperCase();
+            
+            // We only care about the last 3 letters typed
+            if (keyBuffer.length > 3) {
+                keyBuffer = keyBuffer.substring(keyBuffer.length - 3);
+            }
+            
+            // Did they just spell FLY?
+            if (keyBuffer === "FLY") {
+                const plane = document.getElementById("secret-plane");
+                
+                // Trigger the CSS animation
+                plane.classList.add("fly-animation");
+                
+                // Wait 4.5 seconds (after the flight ends) to reset it so they can do it again!
+                setTimeout(() => {
+                    plane.classList.remove("fly-animation");
+                    keyBuffer = ""; 
+                }, 4500);
+            }
+        });
     </script>
 </body>
 </html>
